@@ -14,14 +14,16 @@ public class Rot13Input {
   public static void main(String[] args) throws IOException {
     // Get set up to read lines of text from the user
     BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-    for(;;) {                                    // Loop forever
+    for (;;) {                                    // Loop forever
       System.out.print("> ");                    // Print a prompt
       String line = in.readLine();               // Read a line
-      if ((line == null) || line.equals("quit")) // If EOF or "quit" then...
-        break;                                   // ... break out of the loop
+      if ((line == null) || line.equals("quit")) { // If EOF or "quit" then...
+        break;
+      }
       StringBuffer buf = new StringBuffer(line); // Convert to a StringBuffer
-      for(int i = 0; i < buf.length(); i++)      // For each character...
-        buf.setCharAt(i, rot13(buf.charAt(i)));  //   read, encode, put it back
+      for (int i = 0; i < buf.length(); i++) {      // For each character...
+        buf.setCharAt(i, rot13(buf.charAt(i)));
+      }
       System.out.println(buf);                   // Print encoded line
     }
   }
@@ -30,15 +32,21 @@ public class Rot13Input {
    * This method performs the Rot13 substitution cipher.  It "rotates"
    * each letter 13 places through the alphabet.  Since the Latin alphabet
    * has 26 letters, this method both encodes and decodes.
+   * @param c : character to rotate
+   * @return : rotate character
    **/
   public static char rot13(char c) {
     if ((c >= 'A') && (c <= 'Z')) {  // For uppercase letters
       c += 13;                       // Rotate forward 13
-      if (c > 'Z') c -= 26;         // And subtract 26 if necessary
+      if (c > 'Z') {
+        c -= 26;         // And subtract 26 if necessary
+      }
     }
     if ((c >= 'a') && (c <= 'z')) {  // Do the same for lowercase letters
       c += 13;
-      if (c > 'z') c -= 26;
+      if (c > 'z') {
+        c -= 26;
+      }
     }
     return c;                        // Return the modified letter
   }
